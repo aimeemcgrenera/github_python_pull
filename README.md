@@ -53,7 +53,7 @@ To alter the API request or the BigQuery Project and/or Dataset you would like t
 * run `pip install -r requirements.tx` to install the required packages
 * create a config file based off the exisiting, replace the "bq_project_id" object with the BigQuery Project ID associated with your Gmail account.
 * run `python main.py config/XXXX.json` replace XXXX with your new config file
-* when running the code you will be prompted to give pandas_gbq access. Signin and give access, paste key provided in terminal
+* when running the code you will be prompted to give pandas_gbq access. Signin to the Gmail account associated with your BigQuery account and give access, paste authorization code provided in terminal
 * once complete you will receive a logging message that the API pull has been pushed to BigQuery
 
 ## Contributions
