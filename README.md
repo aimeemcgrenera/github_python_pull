@@ -21,6 +21,7 @@ Each time this code is run, it will pull the most up to date data.
         ├──test.py                                # unit tests  
     ├── main.py                                   # main python script
     ├── README.md                                                                
+    ├── requirements.txt 
     └── ...
 
 ## Configuration 
