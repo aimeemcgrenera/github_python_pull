@@ -12,20 +12,14 @@ Each time this code is run, it will pull the most up to date data.
 ## Architecture
     ├── config                                    # folder to add additional conifguration files to
     |    ├── config_top_python_repos.json         # mock config  
-    ├── env                                       # virtual enviornment
-    |    ├── Include
-    |    ├── Lib
-    |    ├── Scripts
-    |    ├──pyenv.cfg 
-    ├── test 
-        ├──test.py                                # unit tests  
     ├── main.py                                   # main python script
     ├── README.md                                                                
-    ├── requirements.txt 
+    ├── requirements.txt                          # code dependencies
+    ├── test.py                                   # unit tests  
     └── ...
 
 ## Configuration 
-To alter the API request or the BigQuery Project and/or Dataset you would like to push the data to, create a new configuration file. 
+To alter the API request or the Google BigQuery destination you would like to push the data to, create a new configuration file. 
 ```
 [
   {
@@ -49,11 +43,19 @@ To alter the API request or the BigQuery Project and/or Dataset you would like t
 ## Installation Guide
 * fork and clone this repository
 * in terminal run `cd github_python_pull` to change directory and access the application
-* run `.\env\Scripts\activate` to activate virtual environment
-* run `pip install -r requirements.tx` to install the required packages
-* create a config file based off the exisiting, replace the "bq_project_id" object with the BigQuery Project ID associated with your Gmail account.
+* install virtual environment to run code in 
+    * Windows: `py -m pip install --user virtualenv`
+    * MacOS & Linux: `python3 -m pip install --user virtualenv`
+* create a virtual environment
+    * Windows: `python3 -m venv env`
+    * MacOS & Linux: `py -m venv env`
+ * activate virtual environment
+    * Windows: `.\env\Scripts\activate`
+    * MacOS & Linux: `source env/bin/activate`
+* run `pip install -r requirements.txt` to install the required packages
+* create a config file based off the existing, replace the "bq_project_id" object with the BigQuery Project ID associated with your Gmail account; Also update the dataset and datatable you would like to push this data to in BigQuery
 * run `python main.py config/XXXX.json` replace XXXX with your new config file
-* when running the code you will be prompted to give pandas_gbq access. Signin to the Gmail account associated with your BigQuery account and give access, paste authorization code provided in terminal
+* when running the code you will be prompted to give pandas_gbq access; sign in to the Gmail account associated with your BigQuery account and give access, paste authorization code provided in terminal
 * once complete you will receive a logging message that the API pull has been pushed to BigQuery
 
 ## Contributions
