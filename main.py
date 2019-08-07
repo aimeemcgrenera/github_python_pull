@@ -16,11 +16,11 @@ class GithubApiData():
         self.__log.info('Initializing Github API call')
 
         # Read config file
-        configfile = 'config/config_top_python_repos.json'
+        configfile = 'config/config_top_python_repos.json'  # default to original config file if config parameter isn't passed
         if len(sys.argv) > 1:
             configfile = sys.argv[1]
-        self.__log.info('Reading Config Information')
 
+        self.__log.info('Reading Config Information')
         try:
             with open(configfile) as file:
                 configs = file.read()
@@ -60,8 +60,7 @@ class GithubApiData():
        self.push_to_bq(df, self.__bq_project_id, self.__data_set, self.__data_table)
 
     def api_call(self):
-        response = requests.request("GET", self.__api_url, params={"q": self.__api_query, "sort": self.__api_sort,
-                                                                   "order": self.__api_order})
+        response = requests.request("GET", self.__api_url, params={"q": self.__api_query, "sort": self.__api_sort, "order": self.__api_order})
         return response
 
     def process_response(self, response):
@@ -77,8 +76,7 @@ class GithubApiData():
 
         # loop through repos and append data required for columns and create rows
         while (i < limit):
-            rows.append([repos[i]['id'], repos[i]['name'], repos[i]['html_url'], repos[i]['created_at'],
-                         repos[i]['pushed_at'], repos[i]['description'], repos[i]['stargazers_count']])
+            rows.append([repos[i]['id'], repos[i]['name'], repos[i]['html_url'], repos[i]['created_at'], repos[i]['pushed_at'], repos[i]['description'], repos[i]['stargazers_count']])
             i += 1
         return rows
 
