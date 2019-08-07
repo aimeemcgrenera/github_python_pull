@@ -54,11 +54,10 @@ class GithubApiData():
 
     def main(self):
        columns = ['repository_id', 'name', 'url', 'created_date', 'last_push_date', 'description', 'stars']
-       # response from API call
        response = self.api_call()
        rows = self.process_response(response)
        df = self.create_df(rows, columns)
-       # self.push_to_bq(df, self.__bq_project_id, self.__data_set, self.__data_table)
+       self.push_to_bq(df, self.__bq_project_id, self.__data_set, self.__data_table)
 
     def api_call(self):
         response = requests.request("GET", self.__api_url, params={"q": self.__api_query, "sort": self.__api_sort,
@@ -76,6 +75,7 @@ class GithubApiData():
         i = 0
         rows = []
 
+        # loop through repos and append data required for columns and create rows
         while (i < limit):
             rows.append([repos[i]['id'], repos[i]['name'], repos[i]['html_url'], repos[i]['created_at'],
                          repos[i]['pushed_at'], repos[i]['description'], repos[i]['stargazers_count']])
@@ -96,8 +96,10 @@ class GithubApiData():
         print('Updating ' + data_set + ' in BigQuery')
         destination_table = (data_set + "." + data_table)
 
-        ifexists = 'append'
+        # added function_state for unittesting purposes
+        function_state = True
 
+        ifexists = 'append'
         if self.__replace is True:
             ifexists = 'replace'
 
@@ -107,9 +109,12 @@ class GithubApiData():
             df.to_gbq(destination_table, project_id, if_exists=ifexists)
         except:
             self.__log.error('Error pushing data frame to Big Query: ', sys.exc_info()[0])
+            function_state = False
+            return function_state
             raise
 
         print('Successfully updated ' + destination_table + ' in BigQuery')
+        return function_state
 
 
 processed_config = GithubApiData()
