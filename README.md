@@ -42,13 +42,14 @@ To alter the API request or the Google BigQuery destination you would like to pu
     
 ## Installation Guide
 * fork and clone this repository
+    `git clone https://github.com/aimeemcgrenera/github_python_pull.git`
 * in terminal run `cd github_python_pull` to change directory and access the application
 * install virtual environment to run code in 
     * Windows: `py -m pip install --user virtualenv`
     * MacOS & Linux: `python3 -m pip install --user virtualenv`
 * create a virtual environment
-    * Windows: `python3 -m venv env`
-    * MacOS & Linux: `py -m venv env`
+    * Windows: `py -m venv env`
+    * MacOS & Linux: `python3 -m venv env`
  * activate virtual environment
     * Windows: `.\env\Scripts\activate`
     * MacOS & Linux: `source env/bin/activate`
