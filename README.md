@@ -58,6 +58,7 @@ To alter the API request or the Google BigQuery destination you would like to pu
 * run `python main.py config/XXXX.json` replace XXXX with your new config file
 * when running the code you will be prompted to give pandas_gbq access; sign in to the Gmail account associated with your BigQuery account and give access, paste authorization code provided in terminal
 * once complete you will receive a logging message that the API pull has been pushed to BigQuery
+    `Successfully updated outside_data.top_github_python_repos in BigQuery`
 
 ## Contributions
 Please contact me or open an issue before submitting any pull requests.
